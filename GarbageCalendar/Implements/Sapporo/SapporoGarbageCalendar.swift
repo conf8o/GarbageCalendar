@@ -65,8 +65,10 @@ extension SapporoGarbageCallendar {
     ]
 
     static func date(string: String) -> Date? {
-        let d = string.split(separator: "-").map { Int($0)! }
-        let (year, month, day) = (d[0], d[1], d[2])
+        let d = string.split(separator: "-").map { Int($0) }
+        guard d.count == 3, let year = d[0], let month = d[1], let day = d[2] else {
+            return nil
+        }
         return SapporoGarbageCallendar.calendar.date(from: DateComponents(year: year, month: month, day: day))
     }
 }
